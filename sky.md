@@ -216,3 +216,157 @@ Nginx支持 热部署，启动简单，可以做到 7*24 不间断运行。几�
 
 
 ![image-20250314141528015](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314141528015.png)
+
+
+
+## 6.完善新增员工代码
+
+### 代码存在的问题
+
+![image-20250314150447679](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314150447679.png)
+
+
+
+### 1.SQL异常处理
+
+![image-20250314172536487](C:\Users\47324\AppData\Roaming\Typora\typora-user-images\image-20250314172536487.png)
+
+这里由于我们数据设置用户名为独特，因此不能去重复的名字
+
+这里我们要让前端明白我们是哪里出错了。
+
+```java
+ @ExceptionHandler
+    public Result exceptionHandler(SQLIntegrityConstraintViolationException sq){
+        //Duplicate entry '4732442666' for key 'employee.idx_username
+        String message=sq.getMessage();
+        //如果有包含该重复账户名错误
+        if(message.contains("Duplicate entry")){
+            String[] spilt=message.split("");
+            String username=spilt[2];
+            String msg=username+ MessageConstant.ACCOUNT_EXIST;
+            return  Result.success();
+        }else{
+            return  Result.error(MessageConstant.UNKNOWN_ERROR);
+        }
+    }
+```
+
+![image-20250314173508848](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314173508848.png)
+
+
+
+### 2.第二个问题：获取用户ID
+
+![image-20250314195548233](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314195548233.png)
+
+
+
+#### **ThreadLocal技术栈**
+
+![image-20250314195747777](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314195747777.png)
+
+## 7.员工分页
+
+### 1.需求分析
+
+![image-20250314200645151](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314200645151.png)
+
+ 
+
+![image-20250314200738249](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314200738249.png)
+
+**比较重要的是页码和每页记录数**
+
+### 2.功能实现
+
+**前端请求的代码页数**
+
+![image-20250314200900459](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314200900459.png)
+
+ 
+
+
+
+**对于后端所有的分页查询，应该统一封装成PageResult对象**
+
+![image-20250314201034376](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314201034376.png)
+
+
+
+#### PageHelper的功能
+
+- **分页功能**：PageHelper 提供了简单易用的分页功能，你只需要在查询方法前调用 `PageHelper.startPage(pageNum, pageSize)`，接下来的查询就会**自动进行分页**。
+- **与Spring Boot集成**：`pagehelper-spring-boot-starter` 是专门为Spring Boot项目设计的，它简化了PageHelper的配置，通常只需要在 `application.properties` 或 `application.yml` 文件中进行简单的配置即可使用。
+
+```xml
+         <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper}</version>
+            </dependency>
+```
+
+
+
+```xml
+<mapper namespace="com.sky.mapper.EmployeeMapper">
+    <select id="pageQuery" resultType="com.sky.entity.Employee">
+      select * from employee
+      <where>
+          <if test="name != null and name != ''">
+              and name like concat('%',#{name},'%')
+          </if>
+      </where>
+      order by create_time desc 
+    </select>
+</mapper>
+```
+
+- **`namespace`**：指定了 Mapper 接口的全限定名，这里是 `com.sky.mapper.EmployeeMapper`，正确。
+- **`id="pageQuery"`**：定义了查询方法的名称，与 Mapper 接口中的方法名对应，正确。
+- **`resultType="com.sky.entity.Employee"`**：指定了返回结果的类型，这里是 `com.sky.entity.Employee`，正确。
+- **`<where>` 标签**：用于动态生成 SQL 的 `WHERE` 子句，避免多余的 `AND` 或 `OR`，正确。
+- **`<if>` 标签**：用于动态判断条件，如果 `name` 不为空，则拼接 `name like '%value%'` 的条件，正确。
+- **`order by create_time desc`**：按照 `create_time` 字段降序排序，正确。
+
+#### 在配置数据库xml文件，需要在application进行操作
+
+![image-20250314205125897](C:\Users\47324\AppData\Roaming\Typora\typora-user-images\image-20250314205125897.png)
+
+![image-20250314205139126](C:\Users\47324\AppData\Roaming\Typora\typora-user-images\image-20250314205139126.png)
+
+
+
+
+
+
+
+**员工分页查询结果**
+
+![image-20250314211153052](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314211153052.png)
+
+
+
+
+
+### 3.代码完善
+
+#### 如何对时间标准进行处理
+
+![image-20250314211550125](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314211550125.png)
+
+
+
+![image-20250314211829328](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314211829328.png)
+
+ 
+
+![image-20250314213414099](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314213414099.png)
+
+
+
+
+
+## 8.启用和禁用员工账号
+
