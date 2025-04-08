@@ -6,3 +6,5 @@ sky:
     database: sky_take_out
     username: root
     password: 123456
+
+  #记得在进行擅长github需要把它放入密钥文件，以免泄露

@@ -1,4 +1,4 @@
-# SKY-OUT
+#  SKY-OUT
 
 ### **1. HTTP 请求方法**
 
@@ -195,7 +195,27 @@ Nginx支持 热部署，启动简单，可以做到 7*24 不间断运行。几�
 
 ## 4.SWagger注解
 
+![image-20250321212720777](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250321212720777.png)
+
+使用方式：
+
+![image-20250321212822571](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250321212822571.png)
+
+
+
+![image-20250321213041990](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250321213041990.png)
+
+
+
+
+
+![image-20250321213022893](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250321213022893.png)
+
 ![image-20250314141253384](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314141253384.png)
+
+
+
+
 
 
 
@@ -205,7 +225,7 @@ Nginx支持 热部署，启动简单，可以做到 7*24 不间断运行。几�
 
 
 
-
+![image-20250321212926358](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250321212926358.png)
 
 ## 5.新增员工
 
@@ -281,6 +301,8 @@ Nginx支持 热部署，启动简单，可以做到 7*24 不间断运行。几�
 ### 2.功能实现
 
 **前端请求的代码页数**
+
+![image-20250315094102893](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315094102893.png)
 
 ![image-20250314200900459](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314200900459.png)
 
@@ -370,3 +392,495 @@ Nginx支持 热部署，启动简单，可以做到 7*24 不间断运行。几�
 
 ## 8.启用和禁用员工账号
 
+### 1.需求分析
+
+![image-20250314220428732](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314220428732.png)
+
+
+
+**接口设计**
+
+![image-20250314220508019](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250314220508019.png)
+
+
+
+### 2.代码开发
+
+```xml
+    <update id="update" parameterType="com.sky.entity.Employee">
+        update employee
+        <set>
+            <if test="name !=null">name = #{name},</if>
+            <if test="username !=null">username = #{username},</if>
+            <if test="password !=null">password = #{password},</if>
+            <if test="phone !=null">phone = #{phone},</if>
+            <if test="sex !=null">sex = #{sex},</if>
+            <if test="idNumber !=null">id_Number = #{idNumber},</if>
+            <if test="updateTime !=null">update _Time= #{updateTime},</if>
+            <if test="updateUser !=null">update_User = #{updayeUser},</if>
+            <if test="status !=null"> status= #{status},</if>
+        </set>
+                where id = #{id}
+    </update>
+```
+
+
+
+
+
+## 9.编辑员工
+
+### 1.需求分析
+
+![image-20250315094027962](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315094027962.png)
+
+
+
+
+
+![image-20250315094217580](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315094217580.png)
+
+
+
+![image-20250315094323120](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315094323120.png)
+
+
+
+## 10导入功能模块管理
+
+![image-20250315110823219](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315110823219.png)
+
+![image-20250315111228905](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315111228905.png)
+
+
+
+![image-20250315111503610](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315111503610.png)
+
+
+
+
+
+## 11.菜品管理
+
+![image-20250315114159751](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315114159751.png)
+
+### 1公共字段填充
+
+![image-20250315114309653](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315114309653.png)
+
+
+
+![image-20250315114500994](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315114500994.png)
+
+![image-20250315114513837](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250315114513837.png)
+
+
+
+#### **1. `@Target(ElementType.METHOD)`**
+
+`@Target` 注解用于指定自定义注解可以应用的目标范围。`ElementType.METHOD` 表示该注解只能用于方法上。
+
+#### **作用：**
+
+- 限制注解的使用范围，确保注解只能用于方法上。
+- 如果尝试将注解用于类、字段或其他地方，编译器会报错。
+
+#### **常见的 `ElementType` 值：**
+
+- `ElementType.TYPE`：用于类、接口、枚举等。
+- `ElementType.FIELD`：用于字段（成员变量）。
+- `ElementType.METHOD`：用于方法。
+- `ElementType.PARAMETER`：用于方法参数。
+- `ElementType.CONSTRUCTOR`：用于构造函数。
+- `ElementType.LOCAL_VARIABLE`：用于局部变量。
+- `ElementType.ANNOTATION_TYPE`：用于注解类型。
+- `ElementType.PACKAGE`：用于包
+
+
+
+#### **`@Retention(RetentionPolicy.RUNTIME)`**
+
+`@Retention` 注解用于指定自定义注解的生命周期，即注解在什么阶段有效。`RetentionPolicy.RUNTIME` 表示该注解在运行时仍然可用。
+
+#### **作用：**
+
+- 控制注解的保留策略，决定注解在编译时、类加载时或运行时是否可用。
+- `RetentionPolicy.RUNTIME` 表示注解在运行时可以通过反射机制读取。
+
+#### **常见的 `RetentionPolicy` 值：**
+
+- `RetentionPolicy.SOURCE`：注解仅在源代码中保留，编译时会被丢弃。例如 `@Override`。
+- `RetentionPolicy.CLASS`：注解在编译时保留，但运行时不可用。这是默认的保留策略。
+- `RetentionPolicy.RUNTIME`：注解在运行时保留，可以通过反射读取
+
+
+
+```java
+//前置通知代码
+public class AutoFillAspect {
+    /**
+     * 插入点
+     */
+    @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.annotation.AutoFill)")
+    public void autoFillPointCut(){}
+
+    /**
+     * 前置通知
+     *
+     */
+    //在执行SQL方法之前，进行公共字段填充
+     @Before("autoFillPointCut()")
+     public void autoFill(JoinPoint joinPoint){
+         log.info("开始进行公共字段的自动填充....");
+
+         //获取当前被拦截的方法上的数据库操作类型
+         MethodSignature signature=(MethodSignature)joinPoint.getSignature(); //方法签名对象
+         AutoFill autoFill=signature.getMethod().getAnnotation(AutoFill.class); //获得方法上的注解对象
+         OperationType operationType=autoFill.value(); //获得数据库的操作类型
+
+         //获取当前被拦截的参数(约定：获取实体的第一个参数）
+         Object[] args=joinPoint.getArgs();
+         if(args==null || args.length==0){
+             return;
+         }
+         Object entity=args[0];
+
+         //准备赋值的数据
+         LocalDateTime now=LocalDateTime.now();
+         Long currentID= BaseContext.getCurrentId();
+
+         // 根据当前不同的操作类型，为对应的属性通过反射来赋值
+         if(operationType==OperationType.INSERT){
+             //为4个字段赋值
+             try{
+                 Method setCreateTime=entity.getClass().getDeclaredMethod("setCreateTime",LocalDateTime.class);
+                 Method setCreateUser=entity.getClass().getDeclaredMethod("setCreateUser",Long.class);
+                 Method setUpdateTime=entity.getClass().getDeclaredMethod("setUpdateTime",LocalDateTime.class);
+                 Method setUpdateUser=entity.getClass().getDeclaredMethod("updateUser",Long.class);
+
+                 //通过发射来为对象属性赋值
+                 setCreateTime.invoke(entity,now);
+                 setCreateUser.invoke(entity,currentID);
+                 setUpdateTime.invoke(entity,now);
+                 setUpdateUser.invoke(entity,currentID);
+
+             }catch(Exception e){
+                 e.printStackTrace();
+             }
+
+         }else if(operationType==OperationType.UPDATE){
+             try{
+                 Method setUpdateTime=entity.getClass().getDeclaredMethod("setUpdateTime",LocalDateTime.class);
+                 Method setUpdateUser=entity.getClass().getDeclaredMethod("updateUser",Long.class);
+
+                 //通过发射来为对象属性赋值
+                 setUpdateTime.invoke(entity,now);
+                 setUpdateUser.invoke(entity,currentID);
+
+             }catch(Exception e){
+                 e.printStackTrace();
+             }
+
+         }
+```
+
+![image-20250322134923438](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322134923438.png)
+
+
+
+
+
+### 2.新增菜品
+
+1.**需求分析**
+
+![image-20250322135149503](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135149503.png)
+
+**业务规则**
+
+![image-20250322135239966](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135239966.png)
+
+
+
+**接口分析**
+
+![image-20250322135314109](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135314109.png)
+
+![image-20250322135433216](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135433216.png)
+
+![image-20250322135454981](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135454981.png)
+
+
+
+![image-20250322135550167](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135550167.png)
+
+**口味和菜品的数据库关联关系**
+
+![image-20250322135836295](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135836295.png)
+
+
+
+#### （1)开发文件上传接口
+
+![image-20250322135928411](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322135928411.png)
+
+```java
+
+```
+
+![image-20250322140632979](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322140632979.png)
+
+
+
+![image-20250322140649507](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322140649507.png)
+
+![image-20250322141529371](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250322141529371.png)
+
+
+
+**建立工具类来获得远程阿里云服务**
+
+```java
+    /**
+     * 文件上传
+     *
+     * @param bytes
+     * @param objectName
+     * @return
+     */
+    public String upload(byte[] bytes, String objectName) {
+
+        // 创建OSSClient实例。
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+        try {
+            // 创建PutObject请求。
+            ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(bytes));
+        } catch (OSSException oe) {
+            System.out.println("Caught an OSSException, which means your request made it to OSS, "
+                    + "but was rejected with an error response for some reason.");
+            System.out.println("Error Message:" + oe.getErrorMessage());
+            System.out.println("Error Code:" + oe.getErrorCode());
+            System.out.println("Request ID:" + oe.getRequestId());
+            System.out.println("Host ID:" + oe.getHostId());
+        } catch (ClientException ce) {
+            System.out.println("Caught an ClientException, which means the client encountered "
+                    + "a serious internal problem while trying to communicate with OSS, "
+                    + "such as not being able to access the network.");
+            System.out.println("Error Message:" + ce.getMessage());
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+
+        //文件访问路径规则 https://BucketName.Endpoint/ObjectName
+        StringBuilder stringBuilder = new StringBuilder("https://");
+        stringBuilder
+                .append(bucketName)
+                .append(".")
+                .append(endpoint)
+                .append("/")
+                .append(objectName);
+
+        log.info("文件上传到:{}", stringBuilder.toString());
+
+        return stringBuilder.toString();
+    }
+}
+```
+
+#### (2)**新增菜品加口味**
+
+注意两个数据库关联
+
+
+
+### 3.菜品分页查询
+
+![image-20250327110532595](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327110532595.png)
+
+**业务规则：**
+
+![image-20250327110606842](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327110606842.png)
+
+**接口设计**
+
+![image-20250327110658642](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327110658642.png)
+
+
+
+**设计对应的DTO（前端传给后端的页面）**
+
+![image-20250327110845098](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327110845098.png)
+
+
+
+**设计对应的VO（后端传给前端的页面）**
+
+![image-20250327110931955](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327110931955.png)
+
+
+
+```sql
+//插入SQL语句
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        select d.* , c.name as categoryName from dish d left outer join category c on d_id=c.id
+    <where>
+        <if test="name != null">
+            and d.name like concat('%',#{name},'%')
+        </if>
+        <if test="categoryId != null">
+            and d.category_id = #{categoryId}
+        </if>
+        <if test="status != null">
+            and d.status = #{status}
+        </if>
+    
+
+
+<select>：定义了一个查询语句
+id="pageQuery"：这个查询的唯一标识符
+resultType="com.sky.vo.DishVO"：查询结果将映射到DishVO类
+从dish表(别名d)中查询所有字段(d.*)
+通过left outer join关联category表(别名c)，关联条件是d.category_id = c.id
+从category表中查询name字段，并命名为categoryName(这样映射到DishVO对象时会有对应的字段)
+动态WHERE条件：
+<where>标签会自动处理条件前的AND/OR，如果条件都不满足会去掉WHERE关键字
+三个<if>条件判断：
+如果传入的name参数不为null，则添加菜品名称模糊查询条件
+如果传入的categoryId参数不为null，则添加按分类ID精确查询条件
+如果传入的status参数不为null，则添加按状态精确查询条件
+```
+
+
+
+### 4.删除菜品
+
+![image-20250327122728259](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327122728259.png)
+
+![image-20250327122842738](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327122842738.png)
+
+
+
+**三个数据库关联（dish表，dish_flavor表，setmeal_dish表）**
+
+![image-20250327123009220](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327123009220.png)
+
+
+
+### 5.修改菜品
+
+![image-20250327165713151](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327165713151.png)
+
+
+
+![image-20250327165739469](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250327165739469.png)
+
+
+
+
+
+## 12.套餐管理
+
+**完成的功能**：
+
+完成套餐管理模块所有业务功能，包括：
+
+- 新增套餐
+- 套餐分页查询
+- 删除套餐
+- 修改套餐
+- 起售停售套餐
+
+
+
+### 1.新增套餐
+
+![image-20250407164248706](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250407164248706.png)
+
+![image-20250407164317514](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250407164317514.png)
+
+**业务规则：**
+
+套餐名称唯一
+
+套餐必须属于某个分类
+
+套餐必须包含菜品
+
+名称，分类，价格，图片为必填项
+
+添加菜品窗口需要根据分类类型来展示菜品
+
+新增的套餐默认为停售状态
+
+**接口设计**
+
+1.根据类型查询分类
+
+2.根据id查询菜品
+
+3.图片上传
+
+4.新增套餐
+
+![image-20250407165405252](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250407165405252.png)
+
+![image-20250407165417240](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250407165417240.png)
+
+![image-20250407165658669](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250407165658669.png)
+
+
+
+### 2.套餐分页查询
+
+![image-20250408182124587](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408182124587.png)
+
+业务规则：
+
+根据页码进行展示
+
+每页可以展示10条数据
+
+根据需要，按照所命名的字体进行查询（模糊查询）
+
+![image-20250408194637543](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408194637543.png)
+
+### 3.删除套餐
+
+![image-20250408202256635](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408202256635.png)
+
+
+
+### 4.修改套餐
+
+![image-20250408203739386](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408203739386.png)
+
+**接口设计**
+
+根据id查询套餐
+
+根据类型查询分类
+
+根据分类id查询菜品
+
+图片上传
+
+修改套餐
+
+
+
+### 5.停售/起售套餐
+
+![image-20250408211127984](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408211127984.png)
+
+业务规则：
+
+可以对状态为起售套餐进行停售操作，可以对状态为停售的套餐进行起售操作
+
+起售的套餐可以展示在用户端，停售的套餐不能展示在用户端
+
+起售套餐时，如果套餐包含停售的菜品，则不能起售
+
+![image-20250408211311430](C:\Users\47324\Desktop\JAVA_basic\Spring-DelieverySystem\图片\image-20250408211311430.png)
